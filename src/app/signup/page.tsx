@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast,{ Toaster } from 'react-hot-toast';
 import Link from 'next/link';
+import axios from 'axios';
 
 export default function SignUp() {
     const [user, setUser] = useState({
@@ -13,12 +14,19 @@ export default function SignUp() {
         role: 'shop_keeper',
         phone: '',
     });
+    
 
     const router = useRouter();
 
     const handleSignUp = async () => {
-        toast.success("Signup Completed");
-        console.log(user);
+        try {
+            const response = await axios.post("/api/users/signup", user);
+            toast.success("Signup Completed");
+            router.push("/dashboard");
+        } catch (error:any) {
+            console.log("Signup failed", error.message);
+            toast.error(error.message);
+        }
     };
 
     return (

@@ -9,26 +9,28 @@ export default function Profile() {
         { id: 4, date: '2024-09-04', type: 'Buy', item: 'Grapes', quantity: 25, amount: 50, seller: 'Bob Brown' },
         { id: 5, date: '2024-09-05', type: 'Sell', item: 'Tomatoes', quantity: 40, amount: 80, buyer: 'Charlie Green' },
         { id: 6, date: '2024-09-06', type: 'Buy', item: 'Potatoes', quantity: 35, amount: 70, seller: 'Diana White' },
+        { id: 7, date: '2024-09-01', type: 'Sell', item: 'Apples', quantity: 50, amount: 100, buyer: 'John Doe' },
+        { id: 8, date: '2024-09-02', type: 'Buy', item: 'Oranges', quantity: 30, amount: 60, seller: 'Jane Smith' },
+        { id: 9, date: '2024-09-03', type: 'Sell', item: 'Bananas', quantity: 20, amount: 40, buyer: 'Alice Johnson' },
+        { id: 10, date: '2024-09-04', type: 'Buy', item: 'Grapes', quantity: 25, amount: 50, seller: 'Bob Brown' },
+        { id: 11, date: '2024-09-05', type: 'Sell', item: 'Tomatoes', quantity: 40, amount: 80, buyer: 'Charlie Green' },
+        { id: 12, date: '2024-09-06', type: 'Buy', item: 'Potatoes', quantity: 35, amount: 70, seller: 'Diana White' },
     ];
 
     const [user, setUser] = useState({
         username: 'John Doe',
         email: 'johndoe@example.com',
         location: 'New York, USA',
-        role: 'shop_keeper',
         phone: '+1234567890',
     });
 
-    const handleUpdateProfile = (e) => {
-        e.preventDefault();
-        // Handle profile update logic here
+    const handleUpdateProfile = () => {
         console.log(user);
     };
 
     return (
-        <div className="flex min-h-screen bg-gray-900">
-            <div className="flex sm:flex-row flex-col justify-around items-center w-full mx-auto px-6">
-                <div className="bg-white shadow-lg rounded-lg p-8 sm:w-[40%] w-full">
+            <div className=" flex sm:flex-row flex-col justify-around items-center w-full sm:h-screen h-full overflow-hidden bg-gray-900 gap-6 p-6">
+                <div className="bg-white shadow-lg rounded-lg p-8 sm:w-[35vw] w-full h-max">
                     <h1 className="text-2xl font-bold text-center text-gray-700 mb-4">
                         Your Profile
                     </h1>
@@ -78,35 +80,6 @@ export default function Profile() {
                                 onChange={(e) => setUser({ ...user, location: e.target.value })}
                             />
                         </div>
-
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-semibold mb-2">Role</label>
-                            <div className="flex space-x-4">
-                                <label className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="role"
-                                        value="shop_keeper"
-                                        checked={user.role === 'shop_keeper'}
-                                        onChange={(e) => setUser({ ...user, role: e.target.value })}
-                                        className="form-radio text-green-500 focus:ring-green-500"
-                                    />
-                                    <span className="ml-2 text-gray-700">Shop Keeper</span>
-                                </label>
-                                <label className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="role"
-                                        value="food_bank"
-                                        checked={user.role === 'food_bank'}
-                                        onChange={(e) => setUser({ ...user, role: e.target.value })}
-                                        className="form-radio text-green-500 focus:ring-green-500"
-                                    />
-                                    <span className="ml-2 text-gray-700">Food Bank (NGO)</span>
-                                </label>
-                            </div>
-                        </div>
-
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="phone">
                                 Phone Number
@@ -129,7 +102,7 @@ export default function Profile() {
                         </button>
                     </div>
                 </div>
-                <div className="sm:w-[50%] bg-white shadow-lg rounded-lg w-full mx-auto p-8 mt-6 sm:mt-0">
+                <div className="sm:w-[50vw] bg-white shadow-lg rounded-lg w-full  p-8 h-max">
                             <h1 className="text-2xl font-bold text-center text-gray-700 mb-4">
                                 Transaction History
                             </h1>
@@ -137,7 +110,7 @@ export default function Profile() {
                                 Overview of your recent transactions.
                             </p>
 
-                            <div className="overflow-x-auto">
+                            <div className="overflow-y-scroll h-96">
                                 <table className="min-w-full bg-white">
                                     <thead>
                                         <tr>
@@ -165,10 +138,7 @@ export default function Profile() {
                                     </tbody>
                                 </table>
                             </div>
-                        
-                    </div>
+                </div>
             </div>
-            
-        </div>
     );
 }
