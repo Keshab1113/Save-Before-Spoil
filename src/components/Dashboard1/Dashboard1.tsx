@@ -14,8 +14,7 @@ import { FaFilter } from "react-icons/fa";
 import { SlGraph } from "react-icons/sl";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { addIngredient } from "@/redux/slice/itemsSlice";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Foods from "../data/product.json"; // Adjust the path based on your project structure
 import { daysLeft, reducedPrice } from "@/components/Dashboard1/CommonFn";
 
@@ -31,8 +30,7 @@ const Dashboard1 = () => {
     const [end, setEnd] = useState<number>(8);
     const [searchVal, setSearchVal] = useState<string>('');
     const [selected, setSelected] = useState<FoodItem[]>([]);
-    // const dispatch = useDispatch();
-    // const router = useRouter();
+    const router = useRouter();
 
     const handelSelect = (checked: boolean, value: FoodItem) => {
         if (checked) {
@@ -43,8 +41,6 @@ const Dashboard1 = () => {
     };
 
     const handelSubmit = () => {
-        // dispatch(addIngredient(selected));
-        // router.push('/donate-to-food-bank');
     };
 
     const performOperations = (
@@ -57,20 +53,15 @@ const Dashboard1 = () => {
             result.sort((a, b) => (a[options.sortBy as keyof FoodItem] > b[options.sortBy as keyof FoodItem] ? 1 : -1));
         }
 
-        // if (options.range && options.range.field) {
-        //     result = result.filter(
-        //         (product) =>
-        //             product[options.range.field] >= options.range.min &&
-        //             product[options.range.field] <= options.range.max
-        //     );
-        // }
-
         return result;
     };
 
     return (
-        <section className="w-full min-h-screen flex p-6">
-            <div className="w-1/4 h-full bg-gray-50 p-6 rounded-md">
+        <section className="w-full h-screen p-6">
+            <button onClick={() => router.push("/csvupload")} className=" border px-4 py-2 rounded-sm absolute right-4 bg-green-600 hover:bg-orange-400">Add Products</button>
+            <h1 className="text-4xl font-bold text-center mb-2 text-orange-400">Welcome to Dashboard</h1>
+            <h2 className=" capitalize text-center font-semibold text-xl text-green-500">Sell your products before expiry and help for food banks</h2>
+            {/* <div className="w-1/4 h-full bg-gray-50 p-6 rounded-md">
                 <div>
                     <Label htmlFor="search" value="Search food" />
                     <TextInput
@@ -105,9 +96,9 @@ const Dashboard1 = () => {
                     </div>
                 </div>
                 <Button>Search</Button>
-            </div>
+            </div> */}
 
-            <div className="w-3/4 h-full ps-6 ">
+            {/* <div className="w-3/4 h-full ps-6 ">
                 <div className="w-full h-full bg-white rounded-md mb-4">
                     <div className="overflow-x-auto">
                         <Table hoverable>
@@ -208,7 +199,7 @@ const Dashboard1 = () => {
                         Next
                     </Button>
                 </div>
-            </div>
+            </div> */}
         </section>
     );
 };

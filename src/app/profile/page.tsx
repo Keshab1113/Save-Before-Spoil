@@ -1,5 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export default function Profile() {
     const transactions = [
@@ -23,13 +26,23 @@ export default function Profile() {
         location: 'New York, USA',
         phone: '+1234567890',
     });
+    useEffect(() => {
+        const getUserDetails = async () => {
+            const res = await axios.get('/api/users/me');
+            setUser(res.data.data);
+        }
+        getUserDetails();
+    }, []);
 
     const handleUpdateProfile = () => {
         console.log(user);
     };
 
     return (
-            <div className=" flex sm:flex-row flex-col justify-around items-center w-full sm:h-screen h-full overflow-hidden bg-gray-900 gap-6 p-6">
+        <div>
+            <Header/>
+        
+        <div className=" flex sm:flex-row flex-col justify-around items-center w-full sm:h-screen h-full overflow-hidden bg-gray-900 gap-6 p-6">
                 <div className="bg-white shadow-lg rounded-lg p-8 sm:w-[35vw] w-full h-max">
                     <h1 className="text-2xl font-bold text-center text-gray-700 mb-4">
                         Your Profile
@@ -140,5 +153,7 @@ export default function Profile() {
                             </div>
                 </div>
             </div>
+            <Footer/>
+        </div>
     );
 }

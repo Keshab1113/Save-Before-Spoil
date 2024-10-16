@@ -1,14 +1,29 @@
+"use client";
+import axios from 'axios';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { MdMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    const logout = async () => {
+        try {
+            await axios.get('/api/users/logout')
+            toast.success("Logout successful");
+            router.push('/login');
+        } catch (error: any) {
+            console.log("Logout Error", error.message);
+            toast.error(error.message);
+        }
+    }
 
     return (
         <header className="bg-gray-800 text-white shadow-lg">
@@ -37,28 +52,29 @@ export default function Header() {
                         <Link href="/profile" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500">
                             Profile
                         </Link>
-                        <Link href="/logout" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500">
+                            <button onClick={logout} className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500">
                             Logout
-                        </Link>
+                            </button>
                         </nav>
                         :
                         <nav className={`space-x-4 lg:flex ${isOpen ? 'block' : 'hidden'} lg:block h-full items-center`}>
-                            <Link href="/" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500">
+                            <Link href="/" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500 text-orange-400">
                                 Home
                             </Link>
-                            <Link href="/dashboard" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500">
+                            <Link href="/dashboard" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500 text-orange-400">
                                 Dashboard
                             </Link>
-                            <Link href="/profile" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500">
+                            <Link href="/profile" className="block mt-4 lg:inline-block lg:mt-0 hover:text-green-500 text-orange-400">
                                 Profile
                             </Link>
-                            <Link href="/logout" className="flex text-red-700 border border-red-700 px-2 h-[60%] text-center items-center justify-center hover:text-red-500 hover:border-red-500">
-                                <h1 className=''>Logout</h1>
-                            </Link>
+                            <button onClick={logout} className="block mt-4 lg:inline-block lg:mt-0 hover:text-red-700 text-orange-400">
+                                Logout
+                            </button>
                         </nav>
                 }
                 
             </div>
+            <Toaster position="top-right" reverseOrder={false} />
         </header>
     );
 }

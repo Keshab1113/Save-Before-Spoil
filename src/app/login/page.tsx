@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-// import axios from 'axios';
+import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function LoginPage() {
@@ -13,8 +13,15 @@ export default function LoginPage() {
     });
 
     const onLogin = async () => {
-        toast.success("Login Successfull");
-        console.log(user);
+        try {
+            const response = await axios.post("/api/users/login", user);
+            toast.success("Login Successfull");
+            console.log(response);
+            router.push("/");
+        } catch (error: any) {
+            console.log("Login Failed", error.message);
+            toast.error(error.message);
+        }
     };
 
     return (

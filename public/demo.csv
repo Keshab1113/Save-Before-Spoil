@@ -1,0 +1,11 @@
+ProductID,ProductName,Category,Price,Stock
+1,Apple iPhone 13,Electronics,999.99,25
+2,Samsung Galaxy S21,Electronics,799.99,40
+3,Dell XPS 13,Laptops,1299.99,15
+4,Apple MacBook Air,Laptops,1199.99,10
+5,Sony WH-1000XM4,Headphones,349.99,30
+6,Bose QuietComfort 35,Headphones,299.99,50
+7,Nike Air Zoom Pegasus,Shoes,120.00,100
+8,Adidas Ultraboost,Shoes,180.00,80
+9,Instant Pot Duo,Home Appliances,89.99,60
+10,KitchenAid Mixer,Home Appliances,399.99,20

@@ -16,7 +16,7 @@ export default function Home() {
           <p className="text-lg max-w-2xl my-8">
             Welcome to Save Before Spoil! Reduce food waste with our expiration alerts, recipe suggestions, donation connections, and waste analytics. Join us to make smarter food choices and help nourish our communities. Sign up today!
           </p>
-          <Link href={"/login"}
+          <Link href={"/dashboard"}
             className="bg-green-500 hover:bg-orange-400 text-white py-2 px-6 rounded-md"
           >
             Get Started
